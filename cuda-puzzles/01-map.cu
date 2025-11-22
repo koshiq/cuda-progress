@@ -1,7 +1,5 @@
-#include "math_functions_patch.h"
 #include <stdio.h>
 #include <cuda_runtime.h>
-#pragma pop_macro("noexcept")
 
 const int N = 4;
 
