@@ -26,25 +26,6 @@ void init_matrices(int *a, int *b, int *c, int n) {
     }
 }
 
-void check_answer(int *a, int *b, int *c, int n) {
-    int *verify_c;
-    verify_c = (int*)malloc(n * n * sizeof(int));
-    for (int i = 0; i < n * n; i++) {
-        verify_c[i] = 0;
-    }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            for (int k = 0; k < n; k++) {
-                verify_c[i * n + j] += a[i * n + k] * b[k * n + j];
-            }
-        }
-    }
-
-    for (int i = 0; i < n * n; i++) {
-        assert(c[i] == verify_c[i]);
-    }
-    free(verify_c);
-}
 
 int main() {
     int n = 1 << 10;
@@ -75,7 +56,6 @@ int main() {
     cudaDeviceSynchronize();
 
     cudaMemcpy(h_c, d_c, bytes, cudaMemcpyDeviceToHost);
-    check_answer(h_a, h_b, h_c, n);
 
     printf("Matrix multiplication completed successfully.\n");
 

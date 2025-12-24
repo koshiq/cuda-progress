@@ -48,6 +48,7 @@ int main() {
     int NUM_BLOCKS = (n + NUM_THREADS - 1) / NUM_THREADS;
 
     vectorAdd <<< NUM_BLOCKS, NUM_THREADS >>> (d_a, d_b, d_c, n);
+    cudaDeviceSynchronize();
     cudaMemcpy(h_c, d_c, bytes, cudaMemcpyDeviceToHost);
 
     error_check(h_a, h_b, h_c, n);
