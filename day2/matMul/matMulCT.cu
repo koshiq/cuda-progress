@@ -23,7 +23,7 @@ __global__ void tiledMatMUL(int *a, int *b, int *c, int n, int tile_size){
 
     for (int i = 0; i < n / tile_size; i++) {
         A[ty * tile_size + tx] = a[row * n + i * tile_size + tx];
-        B[(ty * tile_size + tx) * n + col] = b[(i * tile_size + ty) * n + col];
+        B[(ty * tile_size + tx) * n + col] = B[ty * tile_size + tx];
 
         __syncthreads();
 
